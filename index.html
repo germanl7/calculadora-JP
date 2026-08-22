@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Neón</title>
+    
+    <link rel="icon" type="image/png" href="icon.png">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="background">
+        <div class="math-symbol plus">+</div>
+        <div class="math-symbol multiply">×</div>
+        <div class="math-symbol percent">%</div>
+        <div class="math-symbol pi">π</div>
+
+        <div class="calculator">
+
+           <div class="top">
+
+    <button class="icon" id="menuBtn" onclick="menuButton()">
+        ☰
+    </button>
+
+    <div class="theme">
+
+        <button class="themeBtn active" id="themeBtn" onclick="toggleTheme()">
+            ☀️
+        </button>
+
+    </div>
+
+    </div>
+
+        <!-- =================================================
+     MENÚ DE AJUSTES
+================================================= -->
+
+<div id="menuPanel" class="menu-panel">
+
+    <div class="menu-header">
+        <h2>⚙️ Ajustes</h2>
+
+        <button
+            class="menu-close"
+            onclick="menuButton()">
+            ✕
+        </button>
+    </div>
+
+
+    <!-- CALCULADORAS -->
+
+    <div class="menu-section">
+
+        <div class="menu-title">
+            CALCULADORAS
+        </div>
+
+        <button class="menu-option" onclick="openTool('area')">
+            <span>📐</span>
+            <div>
+                <strong>Área</strong>
+                <small>Superficie de figuras</small>
+            </div>
+        </button>
+
+        <div class="date-tool">
+
+    <label for="singleDate">
+        📅 Fecha
+    </label>
+
+    <input
+        type="date"
+        id="singleDate"
+        
+        onchange="document.getElementById('dateResult').textContent = ''"
+    >
+
+    <label for="daysToChange">
+        Días
+    </label>
+
+    <input
+        type="number"
+        id="daysToChange"
+        placeholder="Ej: 30"
+        min="0"
+    >
+
+    <div class="date-actions">
+
+        <button onclick="changeDate(1)">
+            ➕ Sumar días
+        </button>
+
+        <button onclick="changeDate(-1)">
+            ➖ Restar días
+        </button>
+
+    </div>
+
+    <div
+        id="dateResult"
+        class="date-result">
+    </div>
+
+</div>
+
+        <button class="menu-option" onclick="openTool('temperature')">
+            <span>🌡️</span>
+            <div>
+                <strong>Temperatura</strong>
+                <small>°C, °F y Kelvin</small>
+            </div>
+        </button>
+
+        <button class="menu-option" onclick="openTool('time')">
+            <span>🕒</span>
+            <div>
+                <strong>Tiempo</strong>
+                <small>Horas, minutos y segundos</small>
+            </div>
+        </button>
+
+    </div>
+
+
+    <!-- AJUSTES -->
+
+    <div class="menu-section">
+
+        <div class="menu-title">
+            AJUSTES
+        </div>
+
+        <button class="menu-option" onclick="openSetting('theme')">
+            <span>🎨</span>
+            <div>
+                <strong>Temas</strong>
+                <small>Apariencia de la calculadora</small>
+            </div>
+        </button>
+
+        <button class="menu-option" onclick="openSetting('sound')">
+            <span>🔊</span>
+            <div>
+                <strong>Sonido y vibración</strong>
+                <small>Controlar efectos</small>
+            </div>
+        </button>
+
+        <button class="menu-option" onclick="openSetting('scientific')">
+            <span>🧮</span>
+            <div>
+                <strong>Modo científico</strong>
+                <small>Funciones avanzadas</small>
+            </div>
+        </button>
+
+        <button class="menu-option" onclick="openSetting('memory')">
+            <span>🧠</span>
+            <div>
+                <strong>Configuración de memoria</strong>
+                <small>Administrar memoria</small>
+            </div>
+        </button>
+
+    </div>
+
+
+    <!-- OTROS -->
+
+    <div class="menu-section">
+
+        <div class="menu-title">
+            OTROS
+        </div>
+
+        <button class="menu-option" onclick="openFeedback()">
+            <span>💬</span>
+            <div>
+                <strong>Enviar comentarios</strong>
+                <small>Ayúdanos a mejorar</small>
+            </div>
+        </button>
+
+         <button class="menu-option" onclick="openAbout()">
+
+    <span>ℹ️</span>
+
+    <div>
+        <strong>Acerca de</strong>
+
+        <small>
+            Información de la calculadora
+        </small>
+    </div>
+
+</button>
+
+    </div>
+
+</div>
+
+            <div class="display">
+                <div id="operation"></div>
+                <div id="result">0</div>
+            </div>
+
+<div id="historyPanel" class="history-panel">
+    <div class="history-header">
+        <span>Historial</span>
+        <button onclick="clearHistory()">Borrar</button>
+    </div>
+
+    <div id="historyList"></div>
+</div>
+
+<!-- FUNCIONES CIENTÍFICAS -->
+<div id="scientificPanel" class="scientific-panel">
+
+    <button onclick="scientific('sqrt')">√</button>
+    <button onclick="scientific('pi')">π</button>
+    <button onclick="scientific('pow')">^</button>
+    <button onclick="scientific('factorial')">!</button>
+
+    <button onclick="scientific('sin')">sin</button>
+    <button onclick="scientific('cos')">cos</button>
+    <button onclick="scientific('tan')">tan</button>
+    <button onclick="scientific('deg')">Deg</button>
+
+    <button onclick="scientific('inv')">Inv</button>
+    <button onclick="scientific('e')">e</button>
+    <button onclick="scientific('ln')">ln</button>
+    <button onclick="scientific('log')">log</button>
+
+</div>
+
+
+            <div class="buttons">
+
+                <button onclick="toggleHistory()" title="Historial">↶</button>
+                <button onclick="toggleScientific()" title="Funciones científicas">∑</button>
+                <button onclick="memoryStore()">MS</button>
+                <button onclick="memoryRecall()">MR</button>
+
+                <button class="special" onclick="clearAll()">AC</button>
+                <button onclick="addValue('(')">( )</button>
+                <button onclick="addValue('%')">%</button>
+                <button class="delete" onclick="deleteLast()">⌫</button>
+
+                <button onclick="addValue('7')">7</button>
+                <button onclick="addValue('8')">8</button>
+                <button onclick="addValue('9')">9</button>
+                <button class="operator" onclick="addValue('/')">÷</button>
+
+                <button onclick="addValue('4')">4</button>
+                <button onclick="addValue('5')">5</button>
+                <button onclick="addValue('6')">6</button>
+                <button class="operator" onclick="addValue('*')">×</button>
+
+                <button onclick="addValue('1')">1</button>
+                <button onclick="addValue('2')">2</button>
+                <button onclick="addValue('3')">3</button>
+                <button class="operator" onclick="addValue('-')">−</button>
+
+                <button class="zero" onclick="addValue('0')">0</button>
+                <button onclick="addValue('.')">,</button>
+                <button class="operator" onclick="addValue('+')">+</button>
+
+                <button class="double-zero" onclick="addValue('00')">00</button>
+                <button class="equals-bottom" onclick="calculate()">=</button>
+                
+            
+
+            </div>
+        </div>
+    </div>
+
+    <!-- =================================================
+     VENTANA DE HERRAMIENTAS
+================================================= -->
+
+<div id="toolPanel" class="tool-panel">
+
+    <div class="tool-header">
+
+        <button
+            class="tool-back"
+            onclick="closeTool()">
+            ←
+        </button>
+
+        <h2 id="toolTitle">Herramienta</h2>
+
+    </div>
+
+    <div id="toolContent"></div>
+
+</div>
+
+    
+
+    <script src="script.js"></script>
+
+
+</body>
+</html>

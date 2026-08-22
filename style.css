@@ -1,0 +1,1840 @@
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    background: #03010d;
+}
+
+/* =====================================================
+   FONDO
+===================================================== */
+
+.background {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            #211052 0%,
+            #08051b 42%,
+            #02010a 80%
+        );
+}
+
+.background::before {
+    content: "";
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    background: #642cff;
+    filter: blur(180px);
+    opacity: 0.25;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* =====================================================
+   CALCULADORA
+===================================================== */
+
+.calculator {
+    width: 430px;
+    max-width: 94vw;
+    padding: 24px;
+    position: relative;
+    z-index: 5;
+    border-radius: 38px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(22, 20, 50, 0.96),
+            rgba(5, 4, 20, 0.98)
+        );
+
+    border: 2px solid rgba(120, 82, 255, 0.65);
+
+    box-shadow:
+        0 0 15px #663cff,
+        0 0 50px rgba(87, 40, 255, 0.45),
+        inset 0 0 40px rgba(91, 44, 255, 0.12);
+}
+
+.calculator::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 38px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6940ff,
+            transparent 35%,
+            transparent 65%,
+            #00bfff
+        );
+
+    z-index: -1;
+    opacity: 0.8;
+}
+
+/* =====================================================
+   PARTE SUPERIOR
+===================================================== */
+
+.top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* =====================================================
+   BOTÓN MENÚ
+===================================================== */
+
+.icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(150, 130, 255, 0.35);
+    background: rgba(80, 70, 140, 0.18);
+    color: white;
+    font-size: 21px;
+    cursor: pointer;
+
+    box-shadow:
+        inset 0 0 20px rgba(120, 80, 255, 0.15);
+
+    transition: 0.2s;
+}
+
+.icon:hover {
+    box-shadow:
+        0 0 15px rgba(120, 80, 255, 0.45);
+
+    transform: scale(1.05);
+}
+
+/* =====================================================
+   BOTÓN SOL / LUNA
+===================================================== */
+
+.theme {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.themeBtn {
+    width: 48px !important;
+    height: 42px !important;
+    padding: 0 !important;
+    border-radius: 22px !important;
+    border: 1px solid rgba(150, 130, 255, 0.25) !important;
+
+    background:
+        rgba(60, 55, 100, 0.35) !important;
+
+    color: #aaa4d0 !important;
+    font-size: 20px !important;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.themeBtn:hover {
+    transform: scale(1.05);
+
+    box-shadow:
+        0 0 15px rgba(120, 70, 255, 0.45);
+}
+
+.themeBtn.active {
+    background:
+        linear-gradient(
+            135deg,
+            #673cff,
+            #9b42ff
+        ) !important;
+
+    color: white !important;
+
+    box-shadow:
+        0 0 15px #713fff !important;
+}
+
+/* =====================================================
+   PANTALLA
+===================================================== */
+
+.display {
+    width: 100%;
+    height: 135px;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(80, 82, 150, 0.38),
+            rgba(17, 16, 48, 0.8)
+        );
+
+    border: 1px solid rgba(120, 130, 255, 0.5);
+
+    box-shadow:
+        inset 0 0 30px rgba(70, 70, 255, 0.25),
+        0 0 20px rgba(70, 70, 255, 0.25);
+
+    overflow: hidden;
+}
+
+/* =====================================================
+   OPERACIÓN
+===================================================== */
+
+#operation {
+    width: 100%;
+    min-height: 25px;
+    color: #aaa8ca;
+    font-size: 17px;
+    margin-bottom: 8px;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* =====================================================
+   RESULTADO
+===================================================== */
+
+#result {
+    width: 100%;
+    color: white;
+    font-size: 40px;
+    font-weight: 300;
+    text-align: right;
+
+    text-shadow:
+        0 0 12px rgba(255, 255, 255, 0.25);
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* =====================================================
+   BOTONES PRINCIPALES
+===================================================== */
+
+.buttons {
+    width: 100%;
+    margin-top: 20px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.buttons button {
+    width: 100%;
+    height: 58px;
+
+    border: none;
+    border-radius: 18px;
+
+    color: white;
+    font-size: 22px;
+    font-weight: 400;
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(54, 55, 88, 0.72),
+            rgba(20, 20, 45, 0.9)
+        );
+
+    border: 1px solid rgba(150, 150, 210, 0.12);
+
+    box-shadow:
+        inset 0 2px 5px rgba(255, 255, 255, 0.05),
+        0 8px 15px rgba(0, 0, 0, 0.3);
+
+    transition:
+        transform 0.12s,
+        box-shadow 0.12s,
+        background 0.12s;
+}
+
+.buttons button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 0 18px rgba(115, 65, 255, 0.45),
+        inset 0 0 15px rgba(120, 80, 255, 0.1);
+}
+
+.buttons button:active {
+    transform: scale(0.93);
+}
+
+/* =====================================================
+   BOTONES ESPECIALES
+===================================================== */
+
+.special {
+    color: #c678ff !important;
+}
+
+.delete {
+    color: #e2ddff !important;
+}
+
+/* =====================================================
+   OPERADORES
+===================================================== */
+
+.operator {
+    background:
+        linear-gradient(
+            145deg,
+            #4434a8,
+            #5725d8
+        ) !important;
+
+    box-shadow:
+        0 0 18px rgba(94, 53, 255, 0.35),
+        inset 0 0 15px rgba(150, 100, 255, 0.15) !important;
+}
+
+/* =====================================================
+   BOTÓN 0
+===================================================== */
+
+.zero {
+    grid-column: span 2;
+}
+
+/* =====================================================
+   BOTÓN 00
+===================================================== */
+
+.double-zero {
+    grid-column: span 1;
+}
+
+/* =====================================================
+   BOTÓN IGUAL
+===================================================== */
+
+.double-zero{
+    grid-column: span 1;
+}
+
+.equals-bottom {
+    grid-column: span 3 !important;
+    width: 100%;
+    height: 58px !important;
+
+    background:
+        linear-gradient(
+            90deg,
+            #812cff,
+            #3e65ff,
+            #00aaff
+        ) !important;
+
+    box-shadow:
+        0 0 25px rgba(94, 48, 255, 0.65),
+        inset 0 0 20px rgba(255, 255, 255, 0.08) !important;
+
+    font-size: 27px !important;
+}
+
+/* =====================================================
+   HISTORIAL
+===================================================== */
+
+.history-panel {
+    width: 100%;
+    display: none;
+    margin-top: 12px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 15px;
+
+    border-radius: 22px;
+
+    background:
+        rgba(8, 7, 25, 0.96);
+
+    border:
+        1px solid rgba(110, 80, 255, 0.3);
+
+    box-shadow:
+        inset 0 0 20px rgba(70, 40, 180, 0.15);
+}
+
+.history-panel.show {
+    display: block;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    margin-bottom: 12px;
+}
+
+.history-header button {
+    border: none;
+    background: transparent;
+    color: #c68cff;
+    cursor: pointer;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 12px;
+    margin-bottom: 8px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(40, 35, 80, 0.55);
+}
+
+.history-item small {
+    display: block;
+    color: #85809f;
+    font-size: 13px;
+}
+
+.history-item strong {
+    display: block;
+    color: white;
+    font-size: 19px;
+    margin-top: 3px;
+}
+
+.history-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.history-actions button {
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 10px;
+
+    background:
+        rgba(100, 70, 220, 0.35);
+
+    color: white;
+    cursor: pointer;
+}
+
+.empty-history {
+    text-align: center;
+    color: #77728e;
+    padding: 20px;
+}
+
+/* =====================================================
+   FUNCIONES CIENTÍFICAS
+===================================================== */
+
+.scientific-panel {
+    width: 100%;
+    display: none;
+
+    grid-template-columns: repeat(4, 1fr);
+    gap: 9px;
+    margin-top: 12px;
+}
+
+.scientific-panel.show {
+    display: grid;
+}
+
+.scientific-panel button {
+    width: 100%;
+    height: 52px;
+
+    border: none;
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #3b2a9c,
+            #271b70
+        );
+
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+
+    box-shadow:
+        0 0 10px rgba(90, 50, 255, 0.15);
+
+    transition: 0.2s;
+}
+
+.scientific-panel button:hover {
+    box-shadow:
+        0 0 15px #7045ff;
+
+    transform: translateY(-2px);
+}
+
+.scientific-panel button:active {
+    transform: scale(0.93);
+}
+
+/* =====================================================
+   BOTONES DE MEMORIA
+===================================================== */
+
+.memory-buttons {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.memory-buttons button {
+    width: 100%;
+    height: 38px;
+
+    border: none;
+    border-radius: 15px;
+
+    background:
+        rgba(40, 35, 75, 0.7);
+
+    color: #aaa1d8;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.memory-buttons button:hover {
+    color: white;
+
+    box-shadow:
+        0 0 10px rgba(100, 70, 255, 0.4);
+}
+
+/* =====================================================
+   MODO OSCURO / CLARO
+===================================================== */
+
+body.light {
+    background: #000000;
+}
+
+body.light .background {
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            #17132b 0%,
+            #050509 50%,
+            #000000 100%
+        );
+}
+
+body.light .calculator {
+    background:
+        linear-gradient(
+            145deg,
+            #151515,
+            #050505
+        );
+
+    border-color: #333333;
+
+    box-shadow:
+        0 0 20px rgba(100, 60, 255, 0.25),
+        inset 0 0 35px rgba(255, 255, 255, 0.02);
+}
+
+body.light .display {
+    background:
+        linear-gradient(
+            145deg,
+            #1c1c1c,
+            #090909
+        );
+
+    border-color: #333333;
+
+    box-shadow:
+        inset 0 0 25px rgba(0, 0, 0, 0.8);
+}
+
+body.light #result {
+    color: #ffffff;
+}
+
+body.light #operation {
+    color: #888888;
+}
+
+body.light .buttons button {
+    color: #171329;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #e4e4f2
+        );
+
+    border-color: #333333;
+}
+
+body.light .buttons button:hover {
+    box-shadow:
+        0 0 15px rgba(120, 70, 255, 0.35);
+}
+
+body.light .operator {
+    color: white !important;
+
+    background:
+        linear-gradient(
+            145deg,
+            #35258c,
+            #5120b8
+        ) !important;
+}
+
+body.light .equals-bottom {
+    color: white !important;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7025ff,
+            #365cff,
+            #009dff
+        ) !important;
+}
+
+/* =====================================================
+   SÍMBOLOS DEL FONDO
+===================================================== */
+
+.math-symbol {
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 90px;
+    height: 90px;
+
+    border-radius: 25px;
+
+    color: #d79aff;
+    font-size: 50px;
+
+    background:
+        rgba(69, 28, 150, 0.3);
+
+    border:
+        1px solid rgba(155, 92, 255, 0.5);
+
+    box-shadow:
+        0 0 30px rgba(113, 45, 255, 0.6),
+        inset 0 0 30px rgba(120, 60, 255, 0.2);
+
+    pointer-events: none;
+
+    transform: rotate(-15deg);
+}
+
+.plus {
+    left: 7%;
+    top: 20%;
+}
+
+.multiply {
+    right: 7%;
+    top: 28%;
+    transform: rotate(15deg);
+}
+
+.percent {
+    left: 7%;
+    bottom: 13%;
+    transform: rotate(-12deg);
+}
+
+.pi {
+    right: 7%;
+    bottom: 15%;
+    transform: rotate(12deg);
+}
+
+/* =====================================================
+   MENÚ LATERAL
+===================================================== */
+
+.menu-panel {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 24px;
+
+    border-radius: 38px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(18, 16, 42, 0.98),
+            rgba(5, 4, 20, 0.99)
+        );
+
+    border:
+        1px solid rgba(120, 82, 255, 0.45);
+
+    box-shadow:
+        0 0 30px rgba(90, 50, 255, 0.3),
+        inset 0 0 30px rgba(90, 50, 255, 0.08);
+
+    z-index: 50;
+
+    overflow-y: auto;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateX(-20px);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s;
+}
+
+.menu-panel.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+}
+
+.menu-header h2 {
+    color: white;
+    font-size: 24px;
+}
+
+.menu-close {
+    width: 40px;
+    height: 40px;
+
+    border: none;
+    border-radius: 50%;
+
+    background:
+        rgba(80, 70, 140, 0.3);
+
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.menu-section {
+    margin-bottom: 20px;
+}
+
+.menu-title {
+    margin-bottom: 8px;
+
+    color: #8279a8;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.menu-option {
+    width: 100%;
+    min-height: 58px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+    margin-bottom: 7px;
+    padding: 10px 12px;
+
+    border:
+        1px solid rgba(130, 100, 255, 0.12);
+
+    border-radius: 17px;
+
+    background:
+        rgba(45, 40, 85, 0.45);
+
+    color: white;
+
+    text-align: left;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.menu-option:hover {
+    background:
+        rgba(80, 60, 150, 0.5);
+
+    border-color:
+        rgba(130, 100, 255, 0.4);
+
+    transform: translateX(3px);
+}
+
+.menu-option > span {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        rgba(100, 70, 220, 0.2);
+
+    font-size: 20px;
+}
+
+.menu-option div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.menu-option strong {
+    font-size: 15px;
+}
+
+.menu-option small {
+    color: #85809f;
+    font-size: 11px;
+}
+
+/* =====================================================
+   VENTANA DE HERRAMIENTAS
+===================================================== */
+
+.tool-panel {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 24px;
+
+    border-radius: 38px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(18, 16, 42, 0.99),
+            rgba(5, 4, 20, 0.99)
+        );
+
+    border:
+        1px solid rgba(120, 82, 255, 0.45);
+
+    z-index: 100;
+
+    overflow-y: auto;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateX(20px);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s;
+}
+
+.tool-panel.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.tool-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.tool-header h2 {
+    color: white;
+    font-size: 23px;
+}
+
+.tool-back {
+    width: 42px;
+    height: 42px;
+
+    border: none;
+    border-radius: 50%;
+
+    background:
+        rgba(80, 70, 140, 0.3);
+
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+#toolContent {
+    width: 100%;
+}
+
+/* =====================================================
+   CAMPOS
+===================================================== */
+
+.tool-input {
+    width: 100%;
+    height: 50px;
+
+    padding: 0 15px;
+    margin-bottom: 12px;
+
+    border:
+        1px solid rgba(130, 100, 255, 0.25);
+
+    border-radius: 15px;
+
+    outline: none;
+
+    background:
+        rgba(30, 27, 60, 0.8);
+
+    color: white;
+    font-size: 16px;
+}
+
+.tool-input:focus {
+    border-color: #7045ff;
+
+    box-shadow:
+        0 0 12px rgba(112, 69, 255, 0.25);
+}
+
+.tool-select {
+    width: 100%;
+    height: 50px;
+
+    padding: 0 15px;
+    margin-bottom: 12px;
+
+    border:
+        1px solid rgba(130, 100, 255, 0.25);
+
+    border-radius: 15px;
+
+    outline: none;
+
+    background: #1e1b3c;
+
+    color: white;
+    font-size: 16px;
+}
+
+/* =====================================================
+   BOTÓN DE CALCULAR / ENVIAR
+===================================================== */
+
+.tool-calculate {
+    width: 100%;
+    height: 52px;
+
+    margin-top: 8px;
+
+    border: none;
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #812cff,
+            #3e65ff,
+            #00aaff
+        );
+
+    color: white;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 20px rgba(94, 48, 255, 0.4);
+}
+
+.tool-calculate:active {
+    transform: scale(0.97);
+}
+
+/* =====================================================
+   RESULTADO
+===================================================== */
+
+.tool-result {
+    margin-top: 18px;
+    padding: 18px;
+
+    border-radius: 17px;
+
+    background:
+        rgba(50, 40, 100, 0.4);
+
+    border:
+        1px solid rgba(130, 100, 255, 0.25);
+
+    color: white;
+    text-align: center;
+    font-size: 19px;
+}
+
+.tool-info {
+    margin-bottom: 15px;
+
+    color: #aaa4d0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* =====================================================
+   AJUSTES
+===================================================== */
+
+.setting-row {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+    padding: 15px;
+    margin-bottom: 10px;
+
+    border-radius: 17px;
+
+    background:
+        rgba(45, 40, 85, 0.45);
+
+    border:
+        1px solid rgba(130, 100, 255, 0.15);
+
+    color: white;
+}
+
+.setting-row div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.setting-row small {
+    color: #85809f;
+    font-size: 11px;
+}
+
+/* =====================================================
+   INTERRUPTORES
+===================================================== */
+
+.setting-toggle {
+    min-width: 58px;
+    height: 34px;
+
+    border: none;
+    border-radius: 20px;
+
+    background: #29263c;
+
+    color: #aaa;
+
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.setting-toggle.on {
+    background:
+        linear-gradient(
+            135deg,
+            #673cff,
+            #9b42ff
+        );
+
+    color: white;
+
+    box-shadow:
+        0 0 12px rgba(113, 63, 255, 0.5);
+}
+
+/* =====================================================
+   COMENTARIOS
+===================================================== */
+
+.feedback-textarea {
+    height: 130px;
+
+    padding: 15px;
+
+    resize: vertical;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    line-height: 1.4;
+}
+
+/* =====================================================
+   MEMORIA
+===================================================== */
+
+.memory-display {
+    width: 100%;
+
+    padding: 20px;
+    margin-bottom: 15px;
+
+    border-radius: 18px;
+
+    background:
+        rgba(45, 40, 85, 0.5);
+
+    border:
+        1px solid rgba(130, 100, 255, 0.2);
+
+    text-align: center;
+    color: #aaa4d0;
+}
+
+.memory-display span {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.memory-display strong {
+    display: block;
+    color: white;
+    font-size: 28px;
+}
+
+.memory-menu-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.memory-menu-buttons button {
+    height: 55px;
+
+    border: none;
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #3b2a9c,
+            #271b70
+        );
+
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.memory-menu-buttons button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 0 15px rgba(110, 70, 255, 0.5);
+}
+
+.memory-menu-buttons button:active {
+    transform: scale(0.94);
+}
+
+/* =====================================================
+   CALCULADORA DE FECHA
+===================================================== */
+
+.date-tool {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.date-tool label {
+    color: #aaa4d0;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.date-tool input {
+    width: 100%;
+    height: 52px;
+
+    padding: 0 15px;
+
+    border:
+        1px solid rgba(130, 100, 255, 0.25);
+
+    border-radius: 16px;
+
+    outline: none;
+
+    background:
+        rgba(30, 25, 65, 0.8);
+
+    color: white;
+    font-size: 16px;
+}
+
+.date-tool input:focus {
+    border-color: #7650ff;
+
+    box-shadow:
+        0 0 12px rgba(110, 70, 255, 0.3);
+}
+
+.date-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.date-actions button {
+    min-height: 52px;
+
+    border: none;
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #3b2a9c,
+            #271b70
+        );
+
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.date-actions button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 0 15px rgba(110, 70, 255, 0.5);
+}
+
+.date-actions button:active {
+    transform: scale(0.95);
+}
+
+.date-result {
+    min-height: 70px;
+
+    margin-top: 8px;
+    padding: 16px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    border-radius: 18px;
+
+    background:
+        rgba(45, 40, 85, 0.5);
+
+    border:
+        1px solid rgba(130, 100, 255, 0.2);
+
+    color: #aaa4d0;
+
+    line-height: 1.5;
+}
+
+.date-result strong {
+    display: block;
+    margin-top: 5px;
+    color: white;
+    font-size: 18px;
+}
+
+/* =====================================================
+   CELULARES
+===================================================== */
+
+@media (max-width: 750px) {
+
+    .background {
+        width: 100vw;
+        min-height: 100vh;
+    }
+
+    .calculator {
+        width: 100vw;
+        max-width: 100vw;
+        height: 100vh;
+        min-height: 100vh;
+
+        padding: 18px;
+
+        border-radius: 0;
+        border: none;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .calculator::before {
+        border-radius: 0;
+    }
+
+    .top {
+        margin-bottom: 15px;
+    }
+
+    .display {
+        height: 180px;
+        flex-shrink: 0;
+        border-radius: 25px;
+    }
+
+    .buttons {
+        flex: 1;
+
+        margin-top: 15px;
+        gap: 9px;
+
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .buttons button {
+        height: auto;
+        min-height: 55px;
+        border-radius: 18px;
+        font-size: 24px;
+    }
+
+    /* 0 = 2 columnas */
+    .zero {
+        grid-column: span 2;
+    }
+
+    /* 00 = 1 columna */
+    .double-zero {
+        grid-column: span 1;
+    }
+
+    /* = = mismo ancho que 0 */
+    .equals-bottom {
+        grid-column: span 2 !important;
+        width: 100%;
+        height: auto !important;
+        min-height: 55px;
+        font-size: 28px !important;
+    }
+
+    .scientific-panel {
+        max-height: 250px;
+        overflow-y: auto;
+    }
+
+    .math-symbol {
+        display: none;
+    }
+
+    .menu-panel,
+    .tool-panel {
+        border-radius: 0;
+    }
+}
+
+/* =====================================================
+   CELULARES PEQUEÑOS
+===================================================== */
+
+@media (max-width: 400px) {
+
+    .calculator {
+        width: 100vw;
+        max-width: 100vw;
+        padding: 16px;
+        border-radius: 0;
+    }
+
+    .calculator::before {
+        border-radius: 0;
+    }
+
+    .display {
+        height: 145px;
+        padding: 16px;
+    }
+
+    #result {
+        font-size: 36px;
+    }
+
+    #operation {
+        font-size: 16px;
+    }
+
+    .buttons {
+        gap: 7px;
+        margin-top: 15px;
+    }
+
+    .buttons button {
+        min-height: 60px;
+        height: 60px;
+        border-radius: 16px;
+        font-size: 21px;
+    }
+
+    .equals-bottom {
+        height: 60px !important;
+        min-height: 60px;
+    }
+
+    .themeBtn {
+        width: 44px !important;
+        height: 40px !important;
+    }
+
+    .icon {
+        width: 44px;
+        height: 44px;
+    }
+
+    .tool-panel,
+    .menu-panel {
+        padding: 18px;
+    }
+}
+
+/* =====================================================
+   ACERCA DE
+===================================================== */
+
+.about-box {
+    text-align: center;
+    padding: 10px 5px;
+}
+
+.about-icon {
+    width: 80px;
+    height: 80px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #673cff,
+            #3e65ff
+        );
+
+    font-size: 40px;
+
+    box-shadow:
+        0 0 25px rgba(100, 60, 255, 0.5);
+}
+
+.about-box h2 {
+    color: white;
+    margin-bottom: 12px;
+}
+
+.about-box > p {
+    color: #aaa4d0;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.about-info {
+    padding: 15px;
+
+    border-radius: 18px;
+
+    background:
+        rgba(45, 40, 85, 0.5);
+
+    border:
+        1px solid rgba(130, 100, 255, 0.2);
+
+    text-align: left;
+}
+
+.about-info p {
+    color: white;
+    margin: 10px 0;
+}
+
+.about-box small {
+    display: block;
+
+    margin-top: 20px;
+
+    color: #77728e;
+}
+
+/* =====================================================
+   ACERCA DE
+===================================================== */
+
+.about-box {
+
+    width: 100%;
+
+    padding: 10px 0;
+
+    text-align: center;
+}
+
+
+/* Icono */
+
+.about-icon {
+
+    width: 85px;
+    height: 85px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #673cff,
+            #3e65ff
+        );
+
+    font-size: 42px;
+
+    box-shadow:
+        0 0 25px rgba(100, 60, 255, 0.5);
+}
+
+
+/* Título */
+
+.about-box h2 {
+
+    color: white;
+
+    font-size: 26px;
+
+    margin-bottom: 10px;
+}
+
+
+/* Descripción */
+
+.about-description {
+
+    color: #aaa4d0;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    margin-bottom: 22px;
+}
+
+
+/* Información */
+
+.about-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    text-align: left;
+}
+
+
+/* Cada dato */
+
+.about-item {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 14px;
+
+    border-radius: 17px;
+
+    background:
+        rgba(45, 40, 85, 0.45);
+
+    border:
+        1px solid rgba(130, 100, 255, 0.15);
+}
+
+
+/* Iconos */
+
+.about-item > span {
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        rgba(100, 70, 220, 0.2);
+
+    font-size: 21px;
+}
+
+
+/* Texto */
+
+.about-item div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.about-item small {
+
+    color: #85809f;
+
+    font-size: 11px;
+}
+
+
+.about-item strong {
+
+    color: white;
+
+    font-size: 16px;
+}
+
+
+/* Pie */
+
+.about-footer {
+
+    margin-top: 25px;
+
+    color: #85809f;
+
+    font-size: 13px;
+}
+
+/* =====================================================
+   CORREO - ACERCA DE
+===================================================== */
+
+.about-email {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 14px;
+
+    margin-top: 10px;
+
+    border-radius: 17px;
+
+    background:
+        rgba(45, 40, 85, 0.45);
+
+    border:
+        1px solid rgba(130, 100, 255, 0.15);
+
+    color: white;
+}
+
+.about-email > span {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 13px;
+
+    background:
+        rgba(100, 70, 220, 0.2);
+
+    font-size: 21px;
+}
+
+.about-email div {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.about-email small {
+    color: #85809f;
+
+    font-size: 11px;
+}
+
+.about-email strong {
+    color: white;
+
+    font-size: 15px;
+
+    word-break: break-word;
+}
+
+/* =====================================================
+   00 + IGUAL
+===================================================== */
+
+.double-zero {
+    grid-column: span 1;
+}
+
+.equals-bottom {
+    grid-column: span 3 !important;
+    height: 58px !important;
+}
+
+
+/* =====================================================
+   TELÉFONO
+===================================================== */
+
+@media (max-width: 750px) {
+
+    .double-zero {
+        grid-column: span 1 !important;
+    }
+
+    .equals-bottom {
+        grid-column: span 3 !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+
+}
