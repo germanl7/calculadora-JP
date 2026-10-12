@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="google-site-verification" content="3IiNHW8vcBDMAV7fU00q67y1sjeVZEYWy-TWsc8Ac8w" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#09091a">
+    <meta name="description" content="Calculadora Neón con funciones básicas y científicas.">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="apple-touch-icon" href="./icon.png">
     <title>Calculadora Neón</title>
     
     <link rel="icon" type="image/png" href="icon.png">
@@ -309,6 +313,14 @@
     
 
     <script src="script.js"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("./service-worker.js")
+                    .catch((error) => console.error("No se pudo activar el modo sin conexión:", error));
+            });
+        }
+    </script>
 
 
 </body>
