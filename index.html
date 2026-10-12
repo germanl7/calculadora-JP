@@ -41,6 +41,14 @@
 
     </div>
 
+    <div style="padding: 0 14px 12px; text-align: center;">
+        <button id="installAppBtn" type="button"
+            style="width:100%; padding:12px 16px; border:1px solid #b66cff; border-radius:12px; color:#fff; background:linear-gradient(135deg,#7c3aed,#c026d3); box-shadow:0 0 14px rgba(168,85,247,.35); font-weight:800; font-size:14px; cursor:pointer;">
+            ⬇ INSTALAR / DESCARGAR APP
+        </button>
+        <div id="installAppMessage" style="display:none; margin-top:8px; color:#d9c2ff; font-size:12px; line-height:1.4;"></div>
+    </div>
+
         <!-- =================================================
      MENÚ DE AJUSTES
 ================================================= -->
@@ -314,6 +322,48 @@
 
     <script src="script.js"></script>
     <script>
+        let deferredInstallPrompt = null;
+        const installAppBtn = document.getElementById("installAppBtn");
+        const installAppMessage = document.getElementById("installAppMessage");
+
+        function showInstallMessage(message) {
+            installAppMessage.textContent = message;
+            installAppMessage.style.display = "block";
+        }
+
+        window.addEventListener("beforeinstallprompt", (event) => {
+            event.preventDefault();
+            deferredInstallPrompt = event;
+            installAppBtn.textContent = "⬇ INSTALAR CALCULADORA NEÓN";
+        });
+
+        installAppBtn.addEventListener("click", async () => {
+            if (deferredInstallPrompt) {
+                deferredInstallPrompt.prompt();
+                const choice = await deferredInstallPrompt.userChoice;
+                if (choice && choice.outcome === "accepted") {
+                    showInstallMessage("¡Perfecto! Sigue las indicaciones del navegador para terminar la instalación.");
+                } else {
+                    showInstallMessage("La instalación se canceló. Puedes volver a intentarlo cuando quieras.");
+                }
+                deferredInstallPrompt = null;
+                return;
+            }
+
+            if (window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true) {
+                showInstallMessage("¡La Calculadora Neón ya está instalada en este dispositivo!");
+                return;
+            }
+
+            showInstallMessage("Para instalarla, abre el menú ⋮ de Chrome y elige «Instalar página como aplicación» o «Agregar a pantalla principal». Si esa opción no aparece, vuelve a intentarlo después de abrir la página con internet y esperar a que cargue.");
+        });
+
+        window.addEventListener("appinstalled", () => {
+            showInstallMessage("¡Calculadora Neón instalada correctamente!");
+            installAppBtn.textContent = "✓ APLICACIÓN INSTALADA";
+        });
+
+        if ("serviceWorker" in navigator) {
         if ("serviceWorker" in navigator) {
             window.addEventListener("load", () => {
                 navigator.serviceWorker.register("./service-worker.js")
